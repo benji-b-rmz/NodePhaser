@@ -15,6 +15,8 @@ preload.prototype = {
 		this.load.setPreloadSprite(loadbar);
 
 		// Environment
+		this.load.tilemap('map', '/images/dungeon/map/testmap.csv', null, Phaser.Tilemap.CSV);
+		this.load.image('tiles', '/images/dungeon/map/mapTiles.png');
 
 		// Sprites
 		this.load.spritesheet('viking', '/images/dungeon/characters/viking.png');
@@ -26,7 +28,9 @@ preload.prototype = {
 
 
 	},
-	create: function(){},
+	create: function(){
+		this.state.start('TheGame');
+	},
 	update: function(){}
 
 }
