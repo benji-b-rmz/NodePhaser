@@ -1,3 +1,4 @@
+
 var titleScreen = function(game) {};
 
 titleScreen.prototype = {

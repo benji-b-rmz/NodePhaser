@@ -1,7 +1,7 @@
 var HEIGHT = 320,
 	WIDTH = 480;
 
-var game = new Phaser.Game(HEIGHT, WIDTH, Phaser.CANVAS, "Dungeon Crawl");
+var game = new Phaser.Game(WIDTH, HEIGHT, Phaser.CANVAS, "Dungeon Crawl");
 game.state.add("Boot", boot);
 game.state.add("Preload", preload);
 game.state.add("TitleScreen", titleScreen);
