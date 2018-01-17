@@ -29,7 +29,7 @@ preload.prototype = {
 
 	},
 	create: function(){
-		this.state.start('TheGame');
+		this.state.start('TitleScreen');
 	},
 	update: function(){}
 
