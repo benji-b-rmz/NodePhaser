@@ -1,10 +1,10 @@
 var HEIGHT = 320,
 	WIDTH = 480;
 
-var game = new Phaser.Game(WIDTH, HEIGHT, Phaser.CANVAS, "Dungeon Crawl");
-game.state.add("Boot", boot);
-game.state.add("Preload", preload);
-game.state.add("TitleScreen", titleScreen);
-game.state.add("TheGame", theGame);
-game.state.add("GameOver", gameOver);
-game.state.start("Boot");
+var DungeonGame = new Phaser.Game(WIDTH, HEIGHT, Phaser.CANVAS, "Dungeon Crawl");
+DungeonGame.state.add("Boot", boot);
+DungeonGame.state.add("Preload", preload);
+DungeonGame.state.add("TitleScreen", titleScreen);
+DungeonGame.state.add("TheGame", theGame);
+DungeonGame.state.add("GameOver", gameOver);
+DungeonGame.state.start("Boot");
