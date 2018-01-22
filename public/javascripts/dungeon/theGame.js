@@ -15,19 +15,61 @@ theGame.prototype = {
 
 		this.player = this.spawnPlayer(5 * this.tilesize, 5 * this.tilesize, 'viking');
 
+		this.game.camera.follow(this.player);
+
 	},
 
-	update: function(){},
+	update: function(){
+
+		this.game.physics.arcade.collide(this.player, this.layer0);
+
+	},
 
 	createMap: function(){
-		// the csv of the map
+		/* the csv of the map */
 		var map = this.game.add.tilemap('map', 16, 16);
-		// the tileset corresponding to the csv
+		/* the tileset corresponding to the csv */
 		map.addTilesetImage('tiles');
-		// create the first layer using the map
+		/* create the first layer using the map */
 		this.layer0 = map.createLayer(0);
 
 		this.layer0.resizeWorld();
+
+		/* Setting tile collision for impassable tiles
+		 * This includes: walls, pillars, misc objects	
+		 */
+
+		/* Side Walls, (includes the dark or empty squares) */
+		map.setCollisionBetween(0,1);
+
+		/* Top walls */
+		map.setCollisionBetween(10,12);
+		// map.setCollisionBetween(20,24);
+		map.setCollision(40);
+		map.setCollision(43);
+		map.setCollision(46);
+
+		map.setCollisionBetween(48,49);
+		map.setCollisionBetween(58,59);
+
+		// map.setCollisionBetween(50,56);
+
+		map.setCollisionBetween(78,79);
+		map.setCollisionBetween(88,89);
+
+
+		/* Bottom walls */
+		map.setCollisionBetween(17,19);
+		map.setCollision(9);
+
+		/* Misc wall objects: pipes, vents */
+		map.setCollisionBetween(3,9);
+		map.setCollisionBetween(13,14);
+		map.setCollision(24);
+		map.setCollision(34);
+		map.setCollisionBetween(44,45);
+		map.setCollisionBetween(28,29);
+		map.setCollisionBetween(38,39);
 
 	},
 

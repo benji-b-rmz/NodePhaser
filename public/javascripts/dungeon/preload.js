@@ -15,7 +15,7 @@ preload.prototype = {
 		this.load.setPreloadSprite(loadbar);
 
 		// Environment
-		this.load.tilemap('map', '/images/dungeon/map/tileReference.csv', null, Phaser.Tilemap.CSV);
+		this.load.tilemap('map', '/images/dungeon/map/testmap.csv', null, Phaser.Tilemap.CSV);
 		this.load.image('tiles', '/images/dungeon/map/mapTiles.png');
 
 		// Sprites
