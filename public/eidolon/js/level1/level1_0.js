@@ -31,8 +31,10 @@ level1_0.prototype = {
 	
 	update: function(){
 
+		/* collide the player with the map tiles */
 		this.game.physics.arcade.collide(this.player, this.layer0);
 
+		/* move the middleground based on current camera location, */
 		this.parallaxBackgrounds();
 	},
 
@@ -152,8 +154,8 @@ level1_0.prototype = {
 			}
 		
 			/* handle jumps */
-			if ( this.jumpButton.isDown && this.body.onFloor() ){
-				this.body.velocity.y = -400;
+			if ( this.jumpButton.isDown && (this.body.onFloor() || this.body.onWall()) ){
+				this.body.velocity.y = -200;
 				this.play('jump');
 			}
 		}
