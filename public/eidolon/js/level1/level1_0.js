@@ -16,9 +16,11 @@ level1_0.prototype = {
 
 	    this.createBackgrounds();
 
-	    this.map = this.createMap();
+	    this.layer0 = null;
+	    this.map = createMap(this, 'map', 'caveTiles');
 
-	    this.player = this.spawnPlayer(
+	    this.player = spawnPlayer(
+	    	this,
 	    	10 * EidolonGlobals.tilesize,
 	    	55 * EidolonGlobals.tilesize,
 	    	'player',
@@ -43,7 +45,7 @@ level1_0.prototype = {
 	    var map = this.game.add.tilemap('map', EidolonGlobals.tilesize, EidolonGlobals.tilesize);
 
 	    //  Now add in the tileset
-	    map.addTilesetImage('tiles');
+	    map.addTilesetImage('caveTiles');
 	    
 	    //  Create our layer
 	    this.layer0 = map.createLayer(0);
@@ -97,74 +99,9 @@ level1_0.prototype = {
 
 
 	    //  Un-comment this on to see the collision tiles
-	    // layer.debug = true;
+	    this.layer0.debug = true;
 
 	    return map;
-	},
-
-	spawnPlayer: function(x, y, spriteKey, frame=0){
-		/* create a new sprite at the tile location corresponding to x and y */
-		var newPlayer = this.game.add.sprite(x, y, spriteKey, frame);
-		newPlayer.anchor.setTo(0.5);
-		newPlayer.speed = 125;
-		newPlayer.health = 5;
-		newPlayer.isRunning = false;
-
-		this.game.physics.arcade.enable(newPlayer);
-		newPlayer.body.gravity.y = 600;
-		newPlayer.body.setSize(11, 40, 35, 24);
-
-		newPlayer.animations.add('jump', createAnimationFrameArray(10, 6) , 50, true);
-    	newPlayer.animations.add('run', createAnimationFrameArray(10*2, 10), 50, true);
-    	// player.animations.add('down', [], 10, true);
-    	newPlayer.animations.add('idle', createAnimationFrameArray(0, 4), 10, true);
-    	newPlayer.animations.add('run-shoot', createAnimationFrameArray(10*3, 10), 20, false);
-    	newPlayer.animations.add('idle-shoot', createAnimationFrameArray(10*4, 3), 20, false);
-    
-    	newPlayer.invulnerable = false;
-
-    	newPlayer.wasd = {
-			up: this.game.input.keyboard.addKey(Phaser.Keyboard.W),
-			down: this.game.input.keyboard.addKey(Phaser.Keyboard.S),
-			left: this.game.input.keyboard.addKey(Phaser.Keyboard.A),
-			right: this.game.input.keyboard.addKey(Phaser.Keyboard.D)
-		};
-
-		newPlayer.jumpButton = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
-
-
-		newPlayer.handleInput = function(){
-			/* handle left/right running */
-			if (this.wasd.left.isDown) {
-				this.scale.x = -1;
-				this.body.velocity.x = -this.speed;
-				this.isRunning = true;
-				if(this.body.onFloor()){ this.play('run');}
-			}
-			else if (this.wasd.right.isDown) {
-				this.scale.x = 1;
-				this.body.velocity.x = this.speed;
-				this.isRunning = true;
-				if(this.body.onFloor()){ this.play('run');}
-			}
-			else { 
-				this.body.velocity.x = 0;
-				this.isRunning = false;
-				if(this.body.onFloor()){ this.play('idle');}
-			}
-		
-			/* handle jumps */
-			if ( this.jumpButton.isDown && (this.body.onFloor() || this.body.onWall()) ){
-				this.body.velocity.y = -200;
-				this.play('jump');
-			}
-		}
-
-		newPlayer.update = function() {
-			this.handleInput();
-		}
-
-		return newPlayer;
 	},
 
 	createBackgrounds: function() {
@@ -180,10 +117,4 @@ level1_0.prototype = {
 		this.middleground.tilePosition.x = this.layer0.x * -0.5;
 	}
 
-}
-
-function createAnimationFrameArray(startIndex, numOfFrames) {
-    var array = [];
-    for (var i = startIndex; i < startIndex + numOfFrames; i++) {array.push(i);}
-    return array;
 }

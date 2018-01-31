@@ -14,7 +14,7 @@ preload.prototype = {
 
 		// Environment
 		this.game.load.tilemap('map', '/eidolon/assets/tilemaps/tilemap.csv', null, Phaser.Tilemap.CSV);
-	    this.game.load.image('tiles', '/eidolon/assets/environment/tiles.png');
+	    this.game.load.image('caveTiles', '/eidolon/assets/environment/tiles.png');
 	    this.game.load.image('background', '/eidolon/assets/environment/background.png');
 	    this.game.load.image('middleground', '/eidolon/assets/environment/middleground.png');
 	    
