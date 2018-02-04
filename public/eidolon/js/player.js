@@ -1,11 +1,17 @@
 function spawnPlayer(state, x, y, spriteKey, frame=0){
+
 	/* create a new sprite at the tile location corresponding to x and y */
 	var newPlayer = state.game.add.sprite(x, y, spriteKey, frame);
 	newPlayer.anchor.setTo(0.5);
-	newPlayer.speed = 125;
+
+	newPlayer.runSpeed = 125;
+	newPlayer.jumpSpeed = -250;
+	newPlayer.wallJumpSpeed = -400;
 	newPlayer.health = 5;
 	newPlayer.isRunning = false;
-
+	newPlayer.invulnerable = false;
+	newPlayer.canWallJump = true; /* this resets every time player touches the ground, allows player to wall jump once */
+	newPlayer.canDoubleJump = true;
 	/* enable physics on player sprite and add hitbox size */
 	state.game.physics.arcade.enable(newPlayer);
 	newPlayer.body.gravity.y = 600;
@@ -19,8 +25,7 @@ function spawnPlayer(state, x, y, spriteKey, frame=0){
 	newPlayer.animations.add('idle-shoot', createAnimationFrameArray(10*4, 3), 20, false);
 	newPlayer.animations.add('cling', createAnimationFrameArray(10*5, 1), 3, false);
 
-	/* invulnerable variable used for handling when player takes damage */
-	newPlayer.invulnerable = false;
+	
 
 	/* W A S D object used for handling player direction input */
 	newPlayer.wasd = {
@@ -37,40 +42,53 @@ function spawnPlayer(state, x, y, spriteKey, frame=0){
 	newPlayer.handleInput = function(){
 
 		/* handle left/right running, using the W A S D keys */
-		
-		if (this.wasd.left.isDown) {
-		
-			this.scale.x = -1;
-			this.body.velocity.x = -this.speed;
-			this.isRunning = true;
-			if(this.body.onFloor()){ this.play('run');}
-			else {this.play('jump');}
 
-		}
-		else if (this.wasd.right.isDown) {
-
-			this.scale.x = 1;
-			this.body.velocity.x = this.speed;
-			this.isRunning = true;
-			if(this.body.onFloor()){ this.play('run');}
-			else {this.play('jump');}
-
-		}
-		else { 
+		if (!(this.wasd.left.isDown || this.wasd.right.isDown) ||
+			 (this.wasd.left.isDown && this.wasd.right.isDown)) { 
 
 			this.body.velocity.x = 0;
 			this.isRunning = false;
 			if(this.body.onFloor()){ this.play('idle');}
 		
 		}
-	
+		else if (this.wasd.right.isDown) {
+
+			this.scale.x = 1;
+			this.body.velocity.x = this.runSpeed;
+			this.isRunning = true;
+			if(this.body.onFloor()){ this.play('run');}
+			else {this.play('jump');}
+
+		}
+		else if (this.wasd.left.isDown) {
+		
+			this.scale.x = -1;
+			this.body.velocity.x = -this.runSpeed;
+			this.isRunning = true;
+			if(this.body.onFloor()){ this.play('run');}
+			else {this.play('jump');}
+
+		}
 		/* Handle jumps */
 
-		/* jump when body is on the floor */
-		if ( this.jumpButton.isDown && (this.body.onFloor() || this.body.onWall())) {
+		/* jump when body is on the floor or made new contact with wall */
+		if ( this.jumpButton.isDown){  
 
-			this.body.velocity.y = -200;
-			this.play('jump');
+			if (this.body.onFloor() ){  
+				this.body.velocity.y = this.jumpSpeed;
+				this.play('jump');
+			}
+			else if (this.body.onWall() && this.canWallJump) {
+				this.canWallJump = false;
+				this.body.velocity.y = this.jumpSpeed;
+				this.play('jump');
+			}
+			// else if (this.canDoubleJump){
+			// 	this.canDoubleJump = false;
+			// 	this.body.velocity.y = this.jumpSpeed;
+			// 	this.play('jump');
+			// }
+
 		}
 
 	}
@@ -78,9 +96,19 @@ function spawnPlayer(state, x, y, spriteKey, frame=0){
 	/* update function called automatically by game loop */
 	newPlayer.update = function() {
 		this.handleInput();
+
+		/* reset the players ability to wall jump every time on floor or in air, encourages wall to wall jumping */
+		if (!this.body.onWall()){ 
+			this.canWallJump = true;
+		}
+		if (this.body.onFloor()){
+			this.canDoubleJump = true;	
+		}
 	}
 
+
 	return newPlayer;
+		
 }
 
 function createAnimationFrameArray(startIndex, numOfFrames) {
@@ -88,3 +116,5 @@ function createAnimationFrameArray(startIndex, numOfFrames) {
     for (var i = startIndex; i < startIndex + numOfFrames; i++) {array.push(i);}
     return array;
 }
+
+

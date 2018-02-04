@@ -12,17 +12,17 @@ level1_0.prototype = {
 		this.blasterSound = this.game.add.audio('blasterSound'); 
 	   	this.jumpSound = this.game.add.audio('jumpSound'); 
 	    this.playerGrunt = this.game.add.audio('playerGrunt'); 
-	    enemyGrunt = this.game.add.audio('enemyGrunt');
+	    // enemyGrunt = this.game.add.audio('enemyGrunt');
 
 	    this.createBackgrounds();
 
 	    this.layer0 = null;
-	    this.map = createMap(this, 'map', 'caveTiles');
+	    this.map = createMap(this, 'level1_0_map', 'caveTiles');
 
 	    this.player = spawnPlayer(
 	    	this,
 	    	10 * EidolonGlobals.tilesize,
-	    	55 * EidolonGlobals.tilesize,
+	    	28 * EidolonGlobals.tilesize,
 	    	'player',
 	    	0
 	    );
@@ -31,7 +31,7 @@ level1_0.prototype = {
 
 	},
 	
-	update: function(){
+	update: function() {
 
 		/* collide the player with the map tiles */
 		this.game.physics.arcade.collide(this.player, this.layer0);
@@ -40,6 +40,14 @@ level1_0.prototype = {
 		this.parallaxBackgrounds();
 
 	},
+
+	restart: function() {
+		this.state.start('Level1_0');
+	},
+
+	startNextLevel: function() {
+		this.state.start("Level1_1");
+	}
 
 	createBackgrounds: function() {
 		/* create background images, background and middleground, used to create parallax effect */

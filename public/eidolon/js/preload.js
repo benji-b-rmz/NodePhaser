@@ -14,9 +14,13 @@ preload.prototype = {
 
 		// Environment
 		this.game.load.tilemap('map', '/eidolon/assets/tilemaps/tilemap.csv', null, Phaser.Tilemap.CSV);
-	    this.game.load.image('caveTiles', '/eidolon/assets/environment/tiles.png');
+	    this.game.load.image('caveTiles', '/eidolon/assets/environment/caveTiles.png');
 	    this.game.load.image('background', '/eidolon/assets/environment/background.png');
 	    this.game.load.image('middleground', '/eidolon/assets/environment/middleground.png');
+
+	    // Level Maps
+	    // Level 1 tilemaps
+	    this.game.load.tilemap('level1_0_map', '/eidolon/assets/tilemaps/level1/level1_0.csv', null, Phaser.Tilemap.CSV);
 	    
 	    // sprites
 	    this.game.load.spritesheet('player', '/eidolon/assets/player/player_sheet.png', 80, 80);

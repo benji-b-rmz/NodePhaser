@@ -20,22 +20,23 @@ function createMap(state, mapCSVKey, tilesetImageKey) {
 
     if(tilesetImageKey == 'caveTiles'){
         //set the collision/callback indices for the caveTiles tileset
-        setCaveMapCollisionTiles(map);
+        setCaveMapCollisionTiles(state, map);
         console.log("Tried to set the cave map collision tiles");
     }
 
-    state.layer0.debug = true;
+    // uncomment debug bool to debug collision tiles
+    // state.layer0.debug = true;
 
     return map;
 }
 
 
-function setCaveMapCollisionTiles(map) {
+function setCaveMapCollisionTiles(state, map) {
 	/* Set tile callbacks for special tiles */
     // map.setTileIndexCallback(78, onHit, state);
 
     /* Set tile collisions for solid impassable tiles */
-
+    this.state = state;
     // General cave wall edges and fill
     map.setCollisionBetween(7, 10);
     map.setCollisionBetween(13, 16);
@@ -61,10 +62,6 @@ function setCaveMapCollisionTiles(map) {
     map.setCollisionBetween(102, 103);
     map.setCollisionBetween(108, 109);
 
-    // Water
-    // map.setCollision(78);
-    // map.setCollision(84);
-
     // Heads
     map.setCollisionBetween(80, 81);
     map.setCollisionBetween(86, 87);
@@ -73,6 +70,11 @@ function setCaveMapCollisionTiles(map) {
     map.setCollision(83); map.setCollision(89); // long-bottom foliage
     map.setCollisionBetween(110, 113); // 110-111 medium sized foliage, 112 - med-small, 113, smallest
     map.setCollision(114); // ceiling foliage
+
+
+    // LAVA
+    map.setTileIndexCallback(78, state.restart, state);
+    map.setTileIndexCallback(84, state.restart, state);
 
 	console.log("SET CAVEMAP COLLISIONS");
 
