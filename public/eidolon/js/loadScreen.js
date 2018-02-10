@@ -1,6 +1,6 @@
-var preload = function(game){};
+var loadScreen = function(game){};
 
-preload.prototype = {
+loadScreen.prototype = {
 
 	init: function() {
 		console.log("LOADING GAME ASSETS");

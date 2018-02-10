@@ -12,7 +12,7 @@ var EidolonGame = new Phaser.Game(
 );
 
 EidolonGame.state.add("Boot", boot);
-EidolonGame.state.add("Preload", preload);
+EidolonGame.state.add("LoadScreen", loadScreen);
 EidolonGame.state.add("TitleScreen", titleScreen);
 EidolonGame.state.add("GameOver", gameOver);
 EidolonGame.state.add("Victory", victory);

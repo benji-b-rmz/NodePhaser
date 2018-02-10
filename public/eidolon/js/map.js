@@ -1,10 +1,28 @@
-/* contains functions dealing with creating level map */
+/* This file contains functions dealing with creating level map
+ * and environment backgrounds
+ */
 
+
+/* function createBackgrounds for the current level */
+function createBackgrounds(state){
+    /* create background images, background and middleground, used to create parallax effect */
+    state.background = state.game.add.tileSprite(0, 0, EidolonGlobals.width, EidolonGlobals.height, 'background');
+    state.background.fixedToCamera = true;
+
+    state.middleground = state.game.add.tileSprite(0, 0, EidolonGlobals.width, EidolonGlobals.height, 'middleground');
+    state.middleground.fixedToCamera = true;
+}
+
+/* function parallaxBackgrounds moves the middle ground in relation to the current position
+ * this creates the effect of the background moving as you move around 
+ */
+function parallaxBackgrounds(state){
+    state.middleground.tilePosition.x = state.layer0.x * -0.5;
+}
 
 /* function createmap, called by create() function in each level state
  * used to generate tilemap layer and collision logic for each level
  */
-
 function createMap(state, mapCSVKey, tilesetImageKey) {
 // Collision map
     var map = state.game.add.tilemap(mapCSVKey, EidolonGlobals.tilesize, EidolonGlobals.tilesize);
@@ -71,10 +89,27 @@ function setCaveMapCollisionTiles(state, map) {
     map.setCollisionBetween(110, 113); // 110-111 medium sized foliage, 112 - med-small, 113, smallest
     map.setCollision(114); // ceiling foliage
 
-
     // LAVA
-    map.setTileIndexCallback(78, state.restart, state);
-    map.setTileIndexCallback(84, state.restart, state);
+    map.setTileIndexCallback(78, state.hitDeathTile, state);
+    map.setTileIndexCallback(84, state.hitDeathTile, state);
+
+    // SPIKE/Insta-Death TILES
+    //top
+    map.setTileIndexCallback(121, state.hitDeathTile, state);
+    map.setTileIndexCallback(122, state.hitDeathTile, state);
+    map.setTileIndexCallback(123, state.hitDeathTile, state);
+    map.setTileIndexCallback(124, state.hitDeathTile, state);
+    //left
+    map.setTileIndexCallback(127, state.hitDeathTile, state);
+    map.setTileIndexCallback(133, state.hitDeathTile, state);
+    //right
+    map.setTileIndexCallback(130, state.hitDeathTile, state);
+    map.setTileIndexCallback(136, state.hitDeathTile, state);
+    //bottom
+    map.setTileIndexCallback(139, state.hitDeathTile, state);
+    map.setTileIndexCallback(140, state.hitDeathTile, state);
+    map.setTileIndexCallback(141, state.hitDeathTile, state);
+    map.setTileIndexCallback(142, state.hitDeathTile, state);
 
 	console.log("SET CAVEMAP COLLISIONS");
 

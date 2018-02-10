@@ -21,7 +21,7 @@ boot.prototype = {
 		this.game.renderer.renderSession.roundPixels = true // no blurring
 		Phaser.Canvas.setImageRenderingCrisp(this.game.canvas);
 
-		this.state.start('Preload');
+		this.state.start('LoadScreen');
 	}
 
 }

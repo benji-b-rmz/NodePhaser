@@ -14,8 +14,9 @@ level1_0.prototype = {
 	    this.playerGrunt = this.game.add.audio('playerGrunt'); 
 	    // enemyGrunt = this.game.add.audio('enemyGrunt');
 
-	    this.createBackgrounds();
+	    createBackgrounds(this);
 
+	    
 	    this.layer0 = null;
 	    this.map = createMap(this, 'level1_0_map', 'caveTiles');
 
@@ -26,7 +27,10 @@ level1_0.prototype = {
 	    	'player',
 	    	0
 	    );
-	   
+
+	    this.createEnemies();
+
+
 	    this.game.camera.follow(this.player);
 
 	},
@@ -35,10 +39,10 @@ level1_0.prototype = {
 
 		/* collide the player with the map tiles */
 		this.game.physics.arcade.collide(this.player, this.layer0);
-
+		this.game.physics.arcade.collide(this.enemies, this.layer0);
+		this.game.physics.arcade.collide(this.player, this.enemies);
 		/* move the middleground based on current camera location, */
-		this.parallaxBackgrounds();
-
+		parallaxBackgrounds(this);
 	},
 
 	restart: function() {
@@ -47,19 +51,32 @@ level1_0.prototype = {
 
 	startNextLevel: function() {
 		this.state.start("Level1_1");
-	}
-
-	createBackgrounds: function() {
-		/* create background images, background and middleground, used to create parallax effect */
-		this.background = this.game.add.tileSprite(0, 0, EidolonGlobals.width, EidolonGlobals.height, 'background');
-		this.background.fixedToCamera = true;
-
-		this.middleground = this.game.add.tileSprite(0, 0, EidolonGlobals.width, EidolonGlobals.height, 'middleground');
-		this.middleground.fixedToCamera = true;
 	},
 
-	parallaxBackgrounds: function(){
-		this.middleground.tilePosition.x = this.layer0.x * -0.5;
+	hitDeathTile: function(sprite, tile) {
+		if (sprite == this.player) {
+			this.restart();
+		}
+	},
+
+	createEnemies: function() {
+		var enemies = this.game.add.group()
+
+   		var crab = PatrolCrab(
+	   		this,
+	   		22 * EidolonGlobals.tilesize,
+	   		28 * EidolonGlobals.tilesize,
+	   		3 * EidolonGlobals.tilesize
+	   	);
+
+		enemies.add(crab);
+
+		this.enemies = enemies;
+	},
+
+	render: function() {
+
+		// this.game.debug.body(this.player);
 	}
 
 }

@@ -14,8 +14,9 @@ function spawnPlayer(state, x, y, spriteKey, frame=0){
 	newPlayer.canDoubleJump = true;
 	/* enable physics on player sprite and add hitbox size */
 	state.game.physics.arcade.enable(newPlayer);
+	newPlayer.body.collideWorldBounds = true;
 	newPlayer.body.gravity.y = 600;
-	newPlayer.body.setSize(11, 40, 35, 24);
+	newPlayer.body.setSize(11, 35, 35, 27);
 
 	/* add the different player animations to the sprite */
 	newPlayer.animations.add('jump', createAnimationFrameArray(10 + 2, 4) , 20, true);
@@ -83,11 +84,11 @@ function spawnPlayer(state, x, y, spriteKey, frame=0){
 				this.body.velocity.y = this.jumpSpeed;
 				this.play('jump');
 			}
-			// else if (this.canDoubleJump){
-			// 	this.canDoubleJump = false;
-			// 	this.body.velocity.y = this.jumpSpeed;
-			// 	this.play('jump');
-			// }
+			else if (this.canDoubleJump){
+				this.canDoubleJump = false;
+				this.body.velocity.y = this.jumpSpeed;
+				this.play('jump');
+			}
 
 		}
 
@@ -116,5 +117,4 @@ function createAnimationFrameArray(startIndex, numOfFrames) {
     for (var i = startIndex; i < startIndex + numOfFrames; i++) {array.push(i);}
     return array;
 }
-
 
