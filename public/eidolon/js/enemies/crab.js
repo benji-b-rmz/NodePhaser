@@ -16,7 +16,7 @@ function PatrolCrab(state, x, y, patrolLength) {
 	crab.health = 1;
 
 	state.game.physics.arcade.enable(crab);
-	crab.body.setSize(15, 20, 16, 11);
+	crab.body.setSize(15, 16, 16, 14);
 	crab.body.gravity.y = 200;
 	crab.scale.x = 1;
 
@@ -35,14 +35,14 @@ function PatrolCrab(state, x, y, patrolLength) {
 		if(this.scale.x == 1) { 
 			this.body.velocity.x = -crab.runSpeed;	
 			if(this.body.x < x) {
-				console.log("Reached right patrol limit");
+				console.log("Reached left patrol limit");
 				this.scale.x = -1;
 			}
 		}
 		else {
 			this.body.velocity.x = crab.runSpeed;
 			if(this.body.x >  (x + patrolLength)) {
-				console.log("Reached left patrol limit");
+				console.log("Reached right patrol limit");
 				this.scale.x = 1;
 			}
 		}

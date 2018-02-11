@@ -23,7 +23,7 @@ level1_0.prototype = {
 	    this.player = spawnPlayer(
 	    	this,
 	    	10 * EidolonGlobals.tilesize,
-	    	28 * EidolonGlobals.tilesize,
+	    	12 * EidolonGlobals.tilesize,
 	    	'player',
 	    	0
 	    );
@@ -40,13 +40,16 @@ level1_0.prototype = {
 		/* collide the player with the map tiles */
 		this.game.physics.arcade.collide(this.player, this.layer0);
 		this.game.physics.arcade.collide(this.enemies, this.layer0);
-		this.game.physics.arcade.collide(this.player, this.enemies);
+	    this.game.physics.arcade.overlap(this.player, this.enemies, this.enemyHitPlayerHandler, null, this);
 		/* move the middleground based on current camera location, */
 		parallaxBackgrounds(this);
 	},
-
+	
 	restart: function() {
-		this.state.start('Level1_0');
+		var gameContext = this; //workaround to access higher scope within setTimeout scrope
+		setTimeout(function(){    
+			gameContext.state.start('Level1_0');
+		}, 500);
 	},
 
 	startNextLevel: function() {
@@ -54,9 +57,13 @@ level1_0.prototype = {
 	},
 
 	hitDeathTile: function(sprite, tile) {
-		if (sprite == this.player) {
-			this.restart();
+		if (sprite == this.player && (this.player.alive)){
+			this.player.explode();
 		}
+	},
+
+	enemyHitPlayerHandler: function(player, enemy) {
+		player.explode();
 	},
 
 	createEnemies: function() {
@@ -64,9 +71,9 @@ level1_0.prototype = {
 
    		var crab = PatrolCrab(
 	   		this,
-	   		22 * EidolonGlobals.tilesize,
-	   		28 * EidolonGlobals.tilesize,
-	   		3 * EidolonGlobals.tilesize
+	   		23 * EidolonGlobals.tilesize,
+	   		14 * EidolonGlobals.tilesize,
+	   		5 * EidolonGlobals.tilesize
 	   	);
 
 		enemies.add(crab);

@@ -90,7 +90,7 @@ function setCaveMapCollisionTiles(state, map) {
     map.setCollision(114); // ceiling foliage
 
     // LAVA
-    map.setTileIndexCallback(78, state.hitDeathTile, state);
+    // map.setTileIndexCallback(78, state.hitDeathTile, state);
     map.setTileIndexCallback(84, state.hitDeathTile, state);
 
     // SPIKE/Insta-Death TILES
@@ -110,6 +110,9 @@ function setCaveMapCollisionTiles(state, map) {
     map.setTileIndexCallback(140, state.hitDeathTile, state);
     map.setTileIndexCallback(141, state.hitDeathTile, state);
     map.setTileIndexCallback(142, state.hitDeathTile, state);
+
+    // Transition to Next Level tiles
+    map.setTileIndexCallback(149, state.startNextLevel, state);
 
 	console.log("SET CAVEMAP COLLISIONS");
 
