@@ -2,7 +2,7 @@ var level1_1 = function(game){};
 
 level1_1.prototype = {
 
-		init: function(){
+	init: function(){
 		console.log("STARTING LEVEL 1_1");
 	},
 
@@ -22,15 +22,15 @@ level1_1.prototype = {
 
 	    this.player = spawnPlayer(
 	    	this,
-	    	10 * EidolonGlobals.tilesize,
-	    	12 * EidolonGlobals.tilesize,
+	    	4 * EidolonGlobals.tilesize,
+	    	33 * EidolonGlobals.tilesize,
 	    	'player',
 	    	0
 	    );
 
 	    this.createEnemies();
 
-	    this.game.camera.follow(this.player);
+	    this.game.camera.follow(this.player,Phaser.Camera.FOLLOW_LOCKON, 0.1, 0.1);
 
 	},
 	
@@ -51,6 +51,10 @@ level1_1.prototype = {
 		}, 500);
 	},
 
+	enemyHitPlayerHandler: function(player, enemy) {
+		player.explode();
+	},
+
 	startNextLevel: function() {
 		this.state.start("Level1_1");
 	},
@@ -59,10 +63,6 @@ level1_1.prototype = {
 		if (sprite == this.player && (this.player.alive)){
 			this.player.explode();
 		}
-	},
-
-	enemyHitPlayerHandler: function(player, enemy) {
-		player.explode();
 	},
 
 	createEnemies: function() {

@@ -31,7 +31,7 @@ level1_0.prototype = {
 	    this.createEnemies();
 
 
-	    this.game.camera.follow(this.player);
+	    this.game.camera.follow(this.player,Phaser.Camera.FOLLOW_LOCKON, 0.1, 0.1);
 
 	},
 	
@@ -67,7 +67,7 @@ level1_0.prototype = {
 	},
 
 	createEnemies: function() {
-		var enemies = this.game.add.group()
+		var enemies = this.game.add.group();
 
    		var crab = PatrolCrab(
 	   		this,
@@ -76,7 +76,15 @@ level1_0.prototype = {
 	   		5 * EidolonGlobals.tilesize
 	   	);
 
+	   	var oct1 = ShootingOctopus(
+	   		this,
+	   		enemies,
+	   		18 * EidolonGlobals.tilesize,
+	   		14 * EidolonGlobals.tilesize,
+	   		);
+
 		enemies.add(crab);
+		enemies.add(oct1);
 
 		this.enemies = enemies;
 	},

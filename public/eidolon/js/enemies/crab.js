@@ -48,7 +48,5 @@ function PatrolCrab(state, x, y, patrolLength) {
 		}
 	}
 
-	state.game.debug.body(crab);
-
 	return crab;
 }
