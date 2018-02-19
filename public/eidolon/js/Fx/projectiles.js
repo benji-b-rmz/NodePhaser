@@ -21,7 +21,7 @@ function spawnBullet(state, parentSprite) {
 	bullet.body.velocity.x = parentSprite.scale.x * bullet.fireSpeed;
 
 	/* add bullet sprite animations */
-	bullet.animations.add('shoot', createAnimationFrameArray(0,2), 20, true);
+	bullet.animations.add('shoot', createAnimationFrameArray(0,2), 5, true);
 
 	bullet.play('shoot');
 
@@ -45,9 +45,22 @@ function spawnEnemyBullet(state, parentSprite, direction) {
 	bullet.body.velocity.x = direction * bullet.fireSpeed;
 
 	/* add bullet sprite animations */
-	bullet.animations.add('shoot', createAnimationFrameArray(0,2), 20, true);
+	bullet.animations.add('shoot', createAnimationFrameArray(0,2), 5, true);
 
 	bullet.play('shoot');
+
+	bullet.update = function() {
+
+		if ((this.body.onWall() || this.body.onFloor()) && this.alive){
+			this.explode();
+		}
+	};
+
+	bullet.explode = function() {
+		this.kill();
+		Explosion(state, this.body.x, this.body.y, 'roundExplosion');
+		return;
+	};
 
 	return bullet;
 } 

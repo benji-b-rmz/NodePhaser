@@ -40,7 +40,6 @@ function ShootingOctopus(state, enemyGroup, x, y) {
 
 	octopus.update = function(){
 		// console.log("octopuse update");
-		console.log(state.game.time.now > this.shootTimer);
 		if(state.game.time.now > this.shootTimer) {
 			this.shoot();
 			this.shootTimer = state.game.time.now + this.shootCooldown;

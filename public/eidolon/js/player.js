@@ -121,7 +121,6 @@ function spawnPlayer(state, x, y, spriteKey, frame=0){
 	/* update function called automatically by game loop */
 	newPlayer.update = function() {
 		this.handleInput();
-
 		/* reset the players ability to wall jump every time on floor or in air, encourages wall to wall jumping */
 		if (!this.body.onWall()){ 
 			this.canWallJump = true;
