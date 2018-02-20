@@ -33,6 +33,7 @@ function spawnEnemyBullet(state, parentSprite, direction) {
 	/* create the sprite at the parent sprite's x,y */
 	var bullet = state.game.add.sprite(parentSprite.x, parentSprite.y, 'enemyBullet', 0);
 	bullet.anchor.setTo(0.5,0.5);
+	bullet.type = ENEMY_TYPES.PROJECTILE;
 
 	/* set some physics constants */
 	bullet.fireSpeed = 150;

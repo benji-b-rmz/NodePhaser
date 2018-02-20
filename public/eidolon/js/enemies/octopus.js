@@ -8,6 +8,7 @@ function Octopus(state, enemyGroup, x, y) {
 	var octopus = state.game.add.sprite(x, y, 'octopus', 0);
 	octopus.anchor.setTo(0.5, 0.5);
 	octopus.health = 1;
+	enemyGroup.add(octopus);
 
 	/* Set octopus' physics properties */
 	state.game.physics.arcade.enable(octopus);
@@ -32,17 +33,17 @@ function Octopus(state, enemyGroup, x, y) {
 }
 
 /* ShootingOctopus creates an octopus that shoots in a fixed direction */
-function ShootingOctopus(state, enemyGroup, x, y) {
+function ShootingOctopus(state, enemyGroup, x, y, shotCooldown, direction) {
 	var octopus = Octopus(state, enemyGroup, x, y);
+	octopus.scale.x = direction;
 	/* set the intervale between shots in milliseconds */
 	octopus.shootTimer = 0;
-	octopus.shootCooldown = 2000;
 
 	octopus.update = function(){
 		// console.log("octopuse update");
 		if(state.game.time.now > this.shootTimer) {
 			this.shoot();
-			this.shootTimer = state.game.time.now + this.shootCooldown;
+			this.shootTimer = state.game.time.now + shotCooldown;
 		}
 
 	}

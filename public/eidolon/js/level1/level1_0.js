@@ -64,27 +64,30 @@ level1_0.prototype = {
 
 	enemyHitPlayerHandler: function(player, enemy) {
 		player.explode();
+		if(enemy.type == ENEMY_TYPES.PROJECTILE){
+			enemy.explode();
+		}
 	},
 
 	createEnemies: function() {
 		var enemies = this.game.add.group();
 
-   		var crab = PatrolCrab(
+   		var crab1 = PatrolCrab(
 	   		this,
 	   		23 * EidolonGlobals.tilesize,
 	   		14 * EidolonGlobals.tilesize,
-	   		5 * EidolonGlobals.tilesize
+	   		4 * EidolonGlobals.tilesize
 	   	);
 
-	   	var oct1 = ShootingOctopus(
+   		var crab2 = PatrolCrab(
 	   		this,
-	   		enemies,
-	   		18 * EidolonGlobals.tilesize,
+	   		37 * EidolonGlobals.tilesize,
 	   		14 * EidolonGlobals.tilesize,
-	   		);
+	   		4 * EidolonGlobals.tilesize
+	   	);
 
-		enemies.add(crab);
-		enemies.add(oct1);
+		enemies.add(crab1);
+		enemies.add(crab2);
 
 		this.enemies = enemies;
 	},
