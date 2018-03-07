@@ -76,6 +76,7 @@ level1_0.prototype = {
 	   		this,
 	   		23 * EidolonGlobals.tilesize,
 	   		14 * EidolonGlobals.tilesize,
+	   		50,
 	   		4 * EidolonGlobals.tilesize
 	   	);
 
@@ -83,6 +84,7 @@ level1_0.prototype = {
 	   		this,
 	   		37 * EidolonGlobals.tilesize,
 	   		14 * EidolonGlobals.tilesize,
+	   		50,
 	   		4 * EidolonGlobals.tilesize
 	   	);
 

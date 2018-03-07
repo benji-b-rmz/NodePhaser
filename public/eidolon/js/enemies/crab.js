@@ -8,11 +8,11 @@
  * as soon as it reaches one boundary, it turns around and walks to
  * the other one
  */
-function PatrolCrab(state, x, y, patrolLength) {
+function PatrolCrab(state, x, y, patrolSpeed, patrolLength) {
 	var crab = state.game.add.sprite(x, y, 'crab', 32);
 	crab.anchor.setTo(0.5, 0.5);
 
-	crab.runSpeed = 50;
+	crab.runSpeed = patrolSpeed;
 	crab.health = 1;
 
 	state.game.physics.arcade.enable(crab);
