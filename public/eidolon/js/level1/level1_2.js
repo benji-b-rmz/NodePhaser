@@ -106,7 +106,7 @@ level1_2.prototype = {
 	   	var octopus2 = ShootingOctopus(
 	   		this,
 	   		enemies,
-	   		32 * EidolonGlobals.tilesize,
+	   		31 * EidolonGlobals.tilesize,
 	   		21 * EidolonGlobals.tilesize,
 	   		1000,
 	   		-1

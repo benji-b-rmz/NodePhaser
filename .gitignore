@@ -59,3 +59,6 @@ typings/
 
 # .DS_Store files from OS
 .DS_Store
+
+# .xls# lock files for speadsheet locks
+.xls#
