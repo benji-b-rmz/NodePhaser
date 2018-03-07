@@ -58,8 +58,10 @@ level1_1.prototype = {
 		}
 	},
 
-	startNextLevel: function() {
-		this.state.start("Level1_2");
+	startNextLevel: function(sprite, tile) {
+		if(sprite == this.player){
+			this.state.start("Level1_2");
+		}
 	},
 
 	hitDeathTile: function(sprite, tile) {

@@ -58,8 +58,10 @@ level1_2.prototype = {
 		}
 	},
 
-	startNextLevel: function() {
-		this.state.start("Level1_2");
+	startNextLevel: function(sprite, tile) {
+		if(sprite == this.player){
+			this.state.start("Level1_2");
+		}
 	},
 
 	hitDeathTile: function(sprite, tile) {
@@ -75,7 +77,7 @@ level1_2.prototype = {
 		var crab1 = PatrolCrab(
 	   		this,
 	   		enemies,
-	   		15 * EidolonGlobals.tilesize,
+	   		14 * EidolonGlobals.tilesize,
 	   		11 * EidolonGlobals.tilesize,
 	   		75,
 	   		4 * EidolonGlobals.tilesize
@@ -84,7 +86,7 @@ level1_2.prototype = {
 	   	var crab1 = PatrolCrab(
 	   		this,
 	   		enemies,
-	   		17 * EidolonGlobals.tilesize,
+	   		16 * EidolonGlobals.tilesize,
 	   		39 * EidolonGlobals.tilesize,
 	   		75,
 	   		4 * EidolonGlobals.tilesize
@@ -95,7 +97,7 @@ level1_2.prototype = {
    		var octopus1 = ShootingOctopus(
 	   		this,
 	   		enemies,
-	   		23 * EidolonGlobals.tilesize,
+	   		22 * EidolonGlobals.tilesize,
 	   		15 * EidolonGlobals.tilesize,
 	   		2000,
 	   		1
