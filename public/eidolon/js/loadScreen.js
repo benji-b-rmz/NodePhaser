@@ -48,6 +48,8 @@ loadScreen.prototype = {
 	    // Level 1 tilemaps
 	    this.game.load.tilemap('level1_0_map', '/eidolon/assets/tilemaps/level1/level1_0.csv', null, Phaser.Tilemap.CSV);
 	    this.game.load.tilemap('level1_1_map', '/eidolon/assets/tilemaps/level1/level1_1.csv', null, Phaser.Tilemap.CSV);
+	    this.game.load.tilemap('level1_2_map', '/eidolon/assets/tilemaps/level1/level1_2.csv', null, Phaser.Tilemap.CSV);
+
 	},
 	
 	create: function() {

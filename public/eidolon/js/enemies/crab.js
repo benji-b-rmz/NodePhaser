@@ -8,8 +8,9 @@
  * as soon as it reaches one boundary, it turns around and walks to
  * the other one
  */
-function PatrolCrab(state, x, y, patrolSpeed, patrolLength) {
+function PatrolCrab(state, enemyGroup, x, y, patrolSpeed, patrolLength) {
 	var crab = state.game.add.sprite(x, y, 'crab', 32);
+	enemyGroup.add(crab);
 	crab.anchor.setTo(0.5, 0.5);
 
 	crab.runSpeed = patrolSpeed;

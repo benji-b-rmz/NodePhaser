@@ -74,6 +74,7 @@ level1_0.prototype = {
 
    		var crab1 = PatrolCrab(
 	   		this,
+	   		enemies,
 	   		23 * EidolonGlobals.tilesize,
 	   		14 * EidolonGlobals.tilesize,
 	   		50,
@@ -82,14 +83,13 @@ level1_0.prototype = {
 
    		var crab2 = PatrolCrab(
 	   		this,
+	   		enemies,
 	   		37 * EidolonGlobals.tilesize,
 	   		14 * EidolonGlobals.tilesize,
 	   		50,
 	   		4 * EidolonGlobals.tilesize
 	   	);
 
-		enemies.add(crab1);
-		enemies.add(crab2);
 
 		this.enemies = enemies;
 	},

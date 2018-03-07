@@ -36,7 +36,7 @@ level1_1.prototype = {
 	
 	update: function() {
 
-		/* collide the player with the map tiles */
+		/* collide the player with the map tiles */                                   
 		this.game.physics.arcade.collide(this.player, this.layer0);
 		this.game.physics.arcade.collide(this.enemies, this.layer0);
 	    this.game.physics.arcade.overlap(this.player, this.enemies, this.enemyHitPlayerHandler, null, this);
@@ -59,7 +59,7 @@ level1_1.prototype = {
 	},
 
 	startNextLevel: function() {
-		this.state.start("Level1_1");
+		this.state.start("Level1_2");
 	},
 
 	hitDeathTile: function(sprite, tile) {
@@ -94,7 +94,7 @@ level1_1.prototype = {
 	   		enemies,
 	   		38 * EidolonGlobals.tilesize,
 	   		11 * EidolonGlobals.tilesize,
-	   		1000,
+	   		1500,
 	   		1
 	   	);
 

@@ -23,6 +23,7 @@ EidolonGame.state.add("Credits", credits);
 /* LEVEL 1 */
 EidolonGame.state.add("Level1_0", level1_0);
 EidolonGame.state.add("Level1_1", level1_1);
+EidolonGame.state.add("Level1_2", level1_2);
 
 /* Start the game */
 EidolonGame.state.start("Boot");
